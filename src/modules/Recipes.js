@@ -8,7 +8,14 @@ const Recipes = {
     } catch (error) {
       return error;
     }
+  },
+  async show(id) {
+    try {
+      const { data } = await api.get(`/recipes/${id}`);
+      return data;
+    } catch (error) {
+      return error;
+    }
   }
 };
-
 export default Recipes;
