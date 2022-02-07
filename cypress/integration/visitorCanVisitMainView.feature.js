@@ -2,7 +2,7 @@
 describe("Visitor can visit the home page.", () => {
   before(() => {
     cy.intercept("GET", "/api/recipes", {
-      fixture: "recipeIndexResponse.json"
+      fixture: "recipesIndexResponse.json"
     }).as("RecipesIndex");
     cy.visit("/");
     cy.wait("@RecipesIndex");

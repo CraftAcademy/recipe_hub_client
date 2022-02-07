@@ -16,7 +16,7 @@ const RecipesMainView = () => {
   const recipesList = recipes.map((recipe, index) => {
     recipe.index = index + 1;
     return (
-      <Grid item key={recipe.id} data-cy="recipes-list">
+      <Grid item key={recipe.id}>
         <RecipeCard recipe={recipe} />
       </Grid>
     );
@@ -27,7 +27,7 @@ const RecipesMainView = () => {
   }, []);
 
   return (
-    <Grid container spacing={{ xs: 2, md: 3 }}>
+    <Grid container spacing={{ xs: 2, md: 3 }} data-cy="recipes-list">
       {recipesList}
     </Grid>
   );
