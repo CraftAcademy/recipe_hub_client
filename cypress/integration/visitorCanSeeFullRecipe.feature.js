@@ -1,0 +1,49 @@
+describe("A visitor, by clicking a recipe card in the main view", () => {
+  before(() => {
+    cy.intercept("GET", "/api/recipes", {
+      fixture: "recipesIndexResponse.json"
+    }).as("RecipesIndex");
+    cy.intercept("GET", "/api/recipes/**", {
+      fixture: "recipesShowResponse.json"
+    }).as("RecipeShow");
+    cy.visit("/");
+    cy.wait("@RecipesIndex");
+    cy.get("[data-cy=recipe-card-1]").click();
+  });
+
+  it("is expected to make a GET request to the API", () => {
+    cy.wait("@RecipeShow").its("request.method").should("eq", "GET");
+  });
+
+  it("is expected to display recipe id in the url", () => {
+    cy.url().should("contain", "/recipes/12");
+  });
+
+  it("is expected to display recipe title", () => {
+    cy.get("[data-cy=recipe-title]").should(
+      "contain.text",
+      "Fried rice with kimchi"
+    );
+  });
+
+  it("is expected to display recipe instructions", () => {
+    cy.get("[data-cy=recipe-instructions]").should(
+      "contain.text",
+      "1. On medium high heat preheat a pan/wok and once heated, add the cooking oil and spread it well with a spatula."
+    );
+  });
+
+  it("is expected to display recipe ingredients", () => {
+    cy.get("[data-cy=ingredients-list]").within(() => {
+      cy.get("[data-cy=ingredient-name-1]").should("contain.text", "sugar");
+      cy.get("[data-cy=ingredient-quantity-1]").should("contain.text", "100 grams");
+    });
+  });
+
+  it("is expected to display recipe creation date", () => {
+    cy.get("[data-cy=recipe-created_at]").should(
+      "contain.text",
+      "February 07, 2022 16:38"
+    );
+  });
+});

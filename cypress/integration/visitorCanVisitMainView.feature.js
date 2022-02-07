@@ -2,7 +2,7 @@
 describe("Visitor can visit the home page.", () => {
   before(() => {
     cy.intercept("GET", "/api/recipes", {
-      fixture: "recipeIndexResponse.json"
+      fixture: "recipesIndexResponse.json"
     }).as("RecipesIndex");
     cy.visit("/");
     cy.wait("@RecipesIndex");
@@ -19,7 +19,7 @@ describe("Visitor can visit the home page.", () => {
   it("is expected to see creation date for recipe", () => {
     cy.get("[data-cy=recipe-header-1]").should(
       "contain.text",
-      "2022-02-07T10:35:20.683Z"
+      "February 07, 2022 16:38"
     );
   });
 
