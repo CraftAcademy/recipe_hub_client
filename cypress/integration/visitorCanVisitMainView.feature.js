@@ -7,9 +7,11 @@ describe("Visitor can visit the home page.", () => {
     cy.visit("/");
     cy.wait("@RecipesIndex");
   });
-
-  it('is expected to see "Recipe Hub"', () => {
-    cy.get("[data-cy=title]").should("contain.text", "Recipe Hub");
+  
+  describe('Can see a navbar', () => {
+    it('is expected to see a header', () => {
+      cy.get("[data-cy=title]").should("contain.text", "Recipe Hub")
+    });
   });
 
   it("is expected to see a collection of recipes", () => {

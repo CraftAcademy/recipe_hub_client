@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe("A visitor, by clicking a recipe card in the main view", () => {
   before(() => {
     cy.intercept("GET", "/api/recipes", {
@@ -36,7 +37,10 @@ describe("A visitor, by clicking a recipe card in the main view", () => {
   it("is expected to display recipe ingredients", () => {
     cy.get("[data-cy=ingredients-list]").within(() => {
       cy.get("[data-cy=ingredient-name-1]").should("contain.text", "sugar");
-      cy.get("[data-cy=ingredient-quantity-1]").should("contain.text", "100 grams");
+      cy.get("[data-cy=ingredient-quantity-1]").should(
+        "contain.text",
+        "100 grams"
+      );
     });
   });
 
@@ -45,5 +49,22 @@ describe("A visitor, by clicking a recipe card in the main view", () => {
       "contain.text",
       "February 07, 2022 16:38"
     );
+  });
+
+  describe("goes back to main page", () => {
+    before(() => {
+      cy.intercept("GET", "/api/recipes", {
+        fixture: "recipesIndexResponse.json"
+      });
+      cy.get("[data-cy=title]").click();
+    });
+
+    it("is expected to change the url ", () => {
+      cy.url().should("not.contain", "/recipes/12");
+    });
+
+    it("is expected to see a collection of recipes", () => {
+      cy.get("[data-cy=recipes-list]").children().should("have.length", 7);
+    });
   });
 });
