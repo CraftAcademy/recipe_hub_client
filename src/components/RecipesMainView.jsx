@@ -3,6 +3,7 @@ import Recipes from "../modules/Recipes";
 import RecipeCard from "./RecipeCard";
 import { Grid } from "@mui/material";
 
+
 const RecipesMainView = () => {
   const [recipes, setRecipes] = useState([]);
 
@@ -16,7 +17,9 @@ const RecipesMainView = () => {
   const recipesList = recipes.map((recipe, index) => {
     recipe.index = index + 1;
     return (
+      
       <Grid item key={recipe.id}>
+  
         <RecipeCard recipe={recipe} />
       </Grid>
     );
