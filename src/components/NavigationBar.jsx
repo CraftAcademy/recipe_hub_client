@@ -31,8 +31,10 @@ const NavigationBar = () => {
           >
             Recipe Hub
           </Typography>
+          <Button color="inherit" data-cy="login-btn">
+            Log In
+          </Button>
           <Button
-            sx={{ alignSelf: "-right" }}
             color="inherit"
             data-cy="sign-up-btn"
             onClick={() => navigate("/signup")}
