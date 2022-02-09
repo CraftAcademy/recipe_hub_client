@@ -2,49 +2,49 @@
   "recipes": [
     {
       "id": 12,
-      "title": "Fried rice with kimchi",
+      "name": "Fried rice with kimchi",
       "instructions": "Mix everything",
       "created_at": "February 07, 2022 16:38",
       "updated_at": "February 07, 2022 16:38"
     },
     {
       "id": 11,
-      "title": "Pasta bolognese",
+      "name": "Pasta bolognese",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
       "updated_at": "2022-02-07T10:35:20.683Z"
     },
     {
       "id": 10,
-      "title": "Flygande Jakob",
+      "name": "Flygande Jakob",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
       "updated_at": "2022-02-07T10:35:20.683Z"
     },
     {
       "id": 9,
-      "title": "Cheese Cake",
+      "name": "Cheese Cake",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
       "updated_at": "2022-02-07T10:35:20.683Z"
     },
     {
       "id": 8,
-      "title": "Cheese Cake",
+      "name": "Cheese Cake",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
       "updated_at": "2022-02-07T10:35:20.683Z"
     },
     {
       "id": 7,
-      "title": "Cheese Cake",
+      "name": "Cheese Cake",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
       "updated_at": "2022-02-07T10:35:20.683Z"
     },
     {
       "id": 6,
-      "title": "Cheese Cake",
+      "name": "Cheese Cake",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
       "updated_at": "2022-02-07T10:35:20.683Z"

@@ -25,7 +25,7 @@ describe("Visitor can visit the home page.", () => {
     );
   });
 
-  it("is expected to see title of first recipe ", () => {
+  it("is expected to see name of first recipe ", () => {
     cy.get("[data-cy=recipe-header-1]").should(
       "contain.text",
       "Fried rice with kimchi"

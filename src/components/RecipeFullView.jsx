@@ -36,8 +36,8 @@ const RecipeFullView = () => {
           />
         </Grid>
         <Grid item>
-          <Typography gutterBottom variant="h5" data-cy="recipe-title">
-            {recipe.title}
+          <Typography gutterBottom variant="h5" data-cy="recipe-name">
+            {recipe.name}
           </Typography>
         </Grid>
         <Grid item xs={12}>

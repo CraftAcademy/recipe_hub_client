@@ -20,8 +20,8 @@ describe("A visitor, by clicking a recipe card in the main view", () => {
     cy.url().should("contain", "/recipes/12");
   });
 
-  it("is expected to display recipe title", () => {
-    cy.get("[data-cy=recipe-title]").should(
+  it("is expected to display recipe name", () => {
+    cy.get("[data-cy=recipe-name]").should(
       "contain.text",
       "Fried rice with kimchi"
     );

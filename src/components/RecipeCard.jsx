@@ -23,7 +23,7 @@ const RecipeCard = ({ recipe }) => {
         <CardHeader
           data-cy={`recipe-header-${recipe.index}`}
           avatar={<Avatar sx={{ bgcolor: colors.red[500] }}>R</Avatar>}
-          title={recipe.title}
+          title={recipe.name}
           subheader={recipe.created_at}
         />
         <CardMedia

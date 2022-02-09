@@ -1,7 +1,7 @@
 {
   "recipe": {
     "id": 12,
-    "title": "Fried rice with kimchi",
+    "name": "Fried rice with kimchi",
     "instructions": "1. On medium high heat preheat a pan/wok and once heated, add the cooking oil and spread it well with a spatula.",
     "ingredients": [
       { "amount": 100.0, "unit": "grams", "name": "sugar" },
