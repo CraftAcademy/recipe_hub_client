@@ -45,7 +45,18 @@ const NavigationBar = () => {
             Recipe Hub
           </Typography>
           {currentUser ? (
-            <div data-cy="user-name">{currentUser.name}</div>
+            <div>
+              <div>
+                <Button
+                  color="inherit"
+                  data-cy="my-recipes"
+                  onClick={() => navigate("/my-recipes")}
+                >
+                  My Recipes
+                </Button>
+              </div>
+              <div data-cy="user-name">{currentUser.name}</div>
+            </div>
           ) : (
             <React.Fragment>
               {showLogin ? (
