@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
-describe("User can log in", () => {
+describe.only("User can log in", () => {
   before(() => {
-    cy.intercept("GET", "/api/recipes", {
-      fixture: "recipesIndexResponse"
-    });
+    cy.intercept("GET", "*/api/recipes", { body: "" });
     cy.visit("/");
     cy.get("[data-cy=login-btn]").click();
   });
@@ -19,16 +17,15 @@ describe("User can log in", () => {
   describe("can fill in email and password input fields", () => {
     before(() => {
       cy.intercept("POST", "/api/auth/sign_in", {
-        fixture: "authenticatedUserResponse"
+        fixture: "authenticatedUserResponse",
       });
       cy.intercept("GET", "/api/auth/validate_token", {
         fixture: "authenticatedUserResponse",
-        headers: { uid: "johnskoglund@test.com", token: "12344556789" }
+        headers: { uid: "johnskoglund@test.com", token: "12344556789" },
       });
       cy.get("[data-cy=email-input]").type("johnskoglund@test.com");
       cy.get("[data-cy=password-input]").type("password{enter}");
     });
-
     it("is expected to dispay user name in a welocome message", () => {
       cy.get("[data-cy=user-name]").should("contain", "John Skoglund");
     });
@@ -36,17 +33,13 @@ describe("User can log in", () => {
 
   describe("can fill wrong credentials", () => {
     before(() => {
-      cy.intercept("GET", "/api/recipes", {
-        fixture: "recipesIndexResponse"
-      });
       cy.intercept("POST", "/api/auth/sign_in", {
-          body: {
-            success: false,
-            errors: ["Invalid login credentials. Please try again."]
-          },
-          statusCode: 401
-        })
-        .as("authenticateRequest");
+        body: {
+          success: false,
+          errors: ["Invalid login credentials. Please try again."],
+        },
+        statusCode: 401,
+      });
       cy.visit("/");
       cy.get("[data-cy=login-btn]").click();
       cy.get("[data-cy=email-input]").type("johnskoglund@test.com");
@@ -54,8 +47,10 @@ describe("User can log in", () => {
     });
 
     it("is expected to display an error message", () => {
-      cy.get("[data-cy=flash-message]")
-        .should("contain.text", "Invalid login credentials. Please try again.");
+      cy.get("[data-cy=flash-message]").should(
+        "contain.text",
+        "Invalid login credentials. Please try again."
+      );
     });
   });
 });
