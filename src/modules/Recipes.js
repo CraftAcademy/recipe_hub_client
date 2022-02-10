@@ -16,6 +16,19 @@ const Recipes = {
     } catch (error) {
       return error;
     }
+  },
+  async create(recipe) {
+    try {
+      const response = await api.post("/recipes", {
+        recipe: {
+          name: recipe.name,
+          instructions: recipe.instructions
+        }
+      });
+      return response;
+    } catch (error) {
+      return error;
+    }
   }
 };
 export default Recipes;
