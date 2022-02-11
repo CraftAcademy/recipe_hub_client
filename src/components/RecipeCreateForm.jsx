@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import { TextField, Button, Alert } from "@mui/material";
 import Recipes from "../modules/Recipes";
+import IngredientsFields from "./IngredientsFields";
 
 const RecipeCreateForm = () => {
+
+  
+  const fields = { ingredient_id: "", unit: "", amount: "" };
   const [recipe, setRecipe] = useState({});
+  const [inputList, setInputList] = useState([fields]);
   const [message, setMessage] = useState();
 
+
   const createRecipe = async () => {
-    const response = await Recipes.create(recipe);
+    const params = {...recipe, ingredients_attributes: fields}
+    debugger
+    const response = await Recipes.create(params);
     setMessage(response.message);
   };
 
   const handleChange = (event) => {
     setRecipe({
       ...recipe,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
+
+  // const setIngredients =
 
   return (
     <div>
@@ -38,6 +48,13 @@ const RecipeCreateForm = () => {
           data-cy="instructions"
           name="instructions"
           onChange={handleChange}
+        />
+      </div>
+      <div>
+        <IngredientsFields
+          fields={fields}
+          inputList={inputList}
+          setInputList={setInputList}
         />
       </div>
       <Button variant="outlined" data-cy="submit-btn" onClick={createRecipe}>
