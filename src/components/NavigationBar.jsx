@@ -6,7 +6,7 @@ import {
   Typography,
   CssBaseline,
   Button,
-  Alert
+  Alert,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -29,7 +29,7 @@ const NavigationBar = () => {
         position="static"
         style={{
           background: "#7a1e77",
-          marginBottom: "20px"
+          marginBottom: "20px",
         }}
       >
         <CssBaseline />
@@ -45,7 +45,18 @@ const NavigationBar = () => {
             Recipe Hub
           </Typography>
           {currentUser ? (
-            <div data-cy="user-name">{currentUser.name}</div>
+            <>
+              <Button
+                color="inherit"
+                data-cy="my-recipes"
+                onClick={() => navigate("/my-recipes")}
+              >
+                My Recipes
+              </Button>
+              <Button data-cy="user-name" color="inherit" variant="outlined">
+                {currentUser.name}
+              </Button>
+            </>
           ) : (
             <React.Fragment>
               {showLogin ? (
@@ -80,7 +91,7 @@ const NavigationBar = () => {
             marginBottom: 10,
             marginTop: -20,
             width: "auto",
-            float: "right"
+            float: "right",
           }}
         >
           {errorMessage}
