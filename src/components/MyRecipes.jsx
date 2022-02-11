@@ -1,9 +1,32 @@
-import React, { useState } from "react";
-import { Typography, Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Button, Grid, Alert } from "@mui/material";
 import RecipeCreateForm from "./RecipeCreateForm";
+import Recipes from "../modules/Recipes";
+import { useSelector } from "react-redux";
+import MyRecipeCard from "./MyRecipeCard";
 
 const MyRecipes = () => {
   const [showForm, setShowForm] = useState(false);
+  const { currentUser } = useSelector((state) => state);
+  const [recipes, setRecipes] = useState([]);
+  //const [message, setMessage] = useState();
+
+  const fetchRecipes = async () => {
+    const response = await Recipes.index(currentUser);
+    setRecipes(response.recipes);
+  };
+
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
+  const userRecipes = recipes.map((recipe) => {
+    return (
+      <Grid item key={recipe.id} md={12}>
+        <MyRecipeCard recipe={recipe} />
+      </Grid>
+    );
+  });
 
   return (
     <>
@@ -19,7 +42,19 @@ const MyRecipes = () => {
           Create recipe
         </Button>
       )}
-      <Typography>Here will be my recipes</Typography>
+      <Grid container spacing={4} data-cy="article-collection">
+        {userRecipes}
+      </Grid>
+
+      {/* {recipes.length === 0 && message && (
+        <Alert
+          data-cy="flash-message"
+          severity="info"
+          sx={{ margin: "20px 0" }}
+        >
+          {message}
+        </Alert>
+      )} */}
     </>
   );
 };
