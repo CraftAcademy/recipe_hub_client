@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
 describe("User can log in", () => {
   before(() => {
-    cy.intercept("GET", "/api/recipes", {
-      fixture: "recipesIndexResponse"
-    });
+    cy.intercept("GET", "/api/recipes", { body: { recipes: [] } });
     cy.visit("/");
     cy.get("[data-cy=login-btn]").click();
   });
@@ -28,7 +26,6 @@ describe("User can log in", () => {
       cy.get("[data-cy=email-input]").type("johnskoglund@test.com");
       cy.get("[data-cy=password-input]").type("password{enter}");
     });
-
     it("is expected to dispay user name in a welocome message", () => {
       cy.get("[data-cy=user-name]").should("contain", "John Skoglund");
     });
@@ -36,17 +33,13 @@ describe("User can log in", () => {
 
   describe("can fill wrong credentials", () => {
     before(() => {
-      cy.intercept("GET", "/api/recipes", {
-        fixture: "recipesIndexResponse"
-      });
       cy.intercept("POST", "/api/auth/sign_in", {
-          body: {
-            success: false,
-            errors: ["Invalid login credentials. Please try again."]
-          },
-          statusCode: 401
-        })
-        .as("authenticateRequest");
+        body: {
+          success: false,
+          errors: ["Invalid login credentials. Please try again."]
+        },
+        statusCode: 401
+      });
       cy.visit("/");
       cy.get("[data-cy=login-btn]").click();
       cy.get("[data-cy=email-input]").type("johnskoglund@test.com");
@@ -54,8 +47,10 @@ describe("User can log in", () => {
     });
 
     it("is expected to display an error message", () => {
-      cy.get("[data-cy=flash-message]")
-        .should("contain.text", "Invalid login credentials. Please try again.");
+      cy.get("[data-cy=flash-message]").should(
+        "contain.text",
+        "Invalid login credentials. Please try again."
+      );
     });
   });
 });

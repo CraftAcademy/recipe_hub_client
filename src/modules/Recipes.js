@@ -16,6 +16,27 @@ const Recipes = {
     } catch (error) {
       return error;
     }
+  },
+  async create(recipe) {
+    try {
+      const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+      const response = await api.post(
+        "/recipes",
+        {
+          recipe: {
+            name: recipe.name,
+            instructions: recipe.instructions,
+            user: headers.uid
+          }
+        },
+        {
+          headers: headers
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return error;
+    }
   }
 };
 export default Recipes;
