@@ -1,0 +1,11 @@
+{
+  "recipe": {
+    "id": 267,
+    "name": "Fried rice with kimchi",
+    "instructions": "Mix and shake it",
+    "created_at": "2022-02-10T16:59:21.951Z",
+    "updated_at": "2022-02-10T16:59:21.951Z",
+    "user_id": 396
+  },
+  "message": "Your recipe has been created"
+}
