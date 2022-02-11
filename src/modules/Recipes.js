@@ -1,9 +1,13 @@
 import { api } from "./network";
 
 const Recipes = {
-  async index() {
+  async index(currentUser) {
     try {
-      const { data } = await api.get("/recipes");
+      const { data } = await api.get("/recipes", {
+        params: {
+          user: currentUser.uid
+        }
+      });
       return data.recipes;
     } catch (error) {
       return error;
