@@ -2,12 +2,14 @@
 describe("Recipe", () => {
   before(() => {
     cy.intercept("GET", "api/recipes", { body: { recipes: [] } });
+    cy.intercept("GET", "api/ingredients", { fixture: 'ingredientsIndexResponse.json' });
+
   });
   describe("can be created by logged in user", () => {
     before(() => {
       cy.intercept("POST", "api/recipes", {
         fixture: "createRecipeResponse.json"
-      }).as("create");
+      })
       cy.visitAndAuthenticate();
       cy.get("[data-cy=my-recipes]").click();
       cy.get("[data-cy=create-recipe]").click();
@@ -16,7 +18,7 @@ describe("Recipe", () => {
       cy.get("[data-cy=submit-btn]").click();
     });
 
-    it("is expected to show a success message", () => {
+    it.only("is expected to show a success message", () => {
       cy.get("[data-cy=flash-message]").should(
         "contain",
         "Your recipe has been created"

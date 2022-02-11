@@ -1,0 +1,8 @@
+{
+  "ingredients": [
+    { "id": 1, "name": "Sugar" },
+    { "id": 2, "name": "Water" },
+    { "id": 3, "name": "Rice" },
+    { "id": 4, "name": "Milk" }
+  ]
+}
