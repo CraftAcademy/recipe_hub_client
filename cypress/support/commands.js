@@ -24,8 +24,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-Cypress.Commands.add('visitAndAuthenticate', () => {
+import "cypress-file-upload";
+Cypress.Commands.add("visitAndAuthenticate", () => {
   cy.intercept("POST", "/api/auth/sign_in", {
     fixture: "authenticatedUserResponse"
   });
@@ -37,4 +37,4 @@ Cypress.Commands.add('visitAndAuthenticate', () => {
   cy.get("[data-cy=login-btn]").click();
   cy.get("[data-cy=email-input]").type("johnskoglund@test.com");
   cy.get("[data-cy=password-input]").type("password{enter}");
-})
+});

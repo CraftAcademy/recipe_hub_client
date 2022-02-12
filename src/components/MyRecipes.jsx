@@ -42,7 +42,7 @@ const MyRecipes = () => {
           Create recipe
         </Button>
       )}
-      <Grid container spacing={4} data-cy="article-collection">
+      <Grid container spacing={4} data-cy="recipe-collection">
         {userRecipes}
       </Grid>
     </>

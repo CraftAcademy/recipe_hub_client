@@ -35,6 +35,7 @@ const Recipes = {
           recipe: {
             name: recipe.name,
             instructions: recipe.instructions,
+            image: recipe.image,
             ingredients_attributes: [...recipe.ingredients_attributes]
           }
         },
