@@ -35,7 +35,7 @@ const Recipes = {
           recipe: {
             name: recipe.name,
             instructions: recipe.instructions,
-            user: headers.uid
+            ingredients_attributes: [...recipe.ingredients_attributes]
           }
         },
         {
@@ -43,6 +43,14 @@ const Recipes = {
         }
       );
       return response.data;
+    } catch (error) {
+      return error;
+    }
+  },
+  async getIngredients() {
+    try {
+      const { data } = await api.get("/ingredients");
+      return data.ingredients;
     } catch (error) {
       return error;
     }
