@@ -24,4 +24,17 @@ describe("User can see their personal page", () => {
         cy.get("[data-cy=recipe-title]").should("contain", "Souvlaki");
       });
   });
+
+  describe("user can click on recipe to and navigate to full recipe view", () => {
+    before(() => {
+      cy.intercept("GET", "api/recipes/*", {
+        fixture: "recipesShowResponse"
+      });
+      cy.get("[data-cy=current-user-recipes]").first().click();
+    });
+
+    it("is expeceted to redirect to full recipe view", () => {
+      cy.url().should("contain", "/recipes/1144");
+    });
+  });
 });
