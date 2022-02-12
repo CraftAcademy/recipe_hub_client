@@ -5,6 +5,9 @@ describe("Recipe", () => {
   });
   describe("can be created by logged in user", () => {
     before(() => {
+      cy.intercept("GET", "api/recipes*", {
+        fixture: "myRecipesResponse.json"
+      });
       cy.intercept("POST", "api/recipes", {
         fixture: "createRecipeResponse.json"
       }).as("create");
@@ -25,6 +28,9 @@ describe("Recipe", () => {
   });
   describe("can't be created with empty name field", () => {
     before(() => {
+      cy.intercept("GET", "api/recipes*", {
+        fixture: "myRecipesResponse.json"
+      });
       cy.intercept("POST", "api/recipes", {
         fixture: "createWithoutName.json"
       });
