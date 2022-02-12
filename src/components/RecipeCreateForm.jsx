@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { TextField, Button, Alert } from "@mui/material";
+import { TextField, Button, Alert, Typography } from "@mui/material";
 import Recipes from "../modules/Recipes";
+import utilities from "../modules/utilities";
+import { styled } from "@mui/material/styles";
 import IngredientsFields from "./IngredientsFields";
+
+const Input = styled("input")({
+  display: "none",
+});
 
 const RecipeCreateForm = () => {
   const fields = { ingredient_id: "", unit: "", amount: "" };
   const [recipe, setRecipe] = useState({});
   const [inputList, setInputList] = useState([fields]);
   const [message, setMessage] = useState();
+  const [fileName, setFileName] = useState("");
 
   const createRecipe = async () => {
     const params = { ...recipe, ingredients_attributes: inputList };
@@ -18,15 +25,23 @@ const RecipeCreateForm = () => {
   const handleChange = (event) => {
     setRecipe({
       ...recipe,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
+  };
+
+  const handleImage = async (event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+    file.name && setFileName(file.name);
+    const encodedFile = await utilities.imageEncoder(file);
+    setRecipe({ ...recipe, image: encodedFile });
   };
 
   return (
     <div>
       <TextField
         id="outlined-basic"
-        label="Recipe name"
+        label="recipe-name"
         variant="outlined"
         data-cy="recipe-name"
         name="name"
@@ -54,6 +69,29 @@ const RecipeCreateForm = () => {
       <Button variant="outlined" data-cy="submit-btn" onClick={createRecipe}>
         Save
       </Button>
+      <div>
+        <label htmlFor="contained-button-file">
+          <Input
+            id="contained-button-file"
+            data-cy="attach-image"
+            accept="image/*"
+            onChange={handleImage}
+            name="image"
+            multiple
+            type="file"
+          />
+          <Button variant="contained" component="span">
+            Image
+          </Button>
+        </label>
+        <Typography
+          variant="caption"
+          gutterBottom
+          style={{ marginLeft: "10px" }}
+        >
+          {fileName}
+        </Typography>
+      </div>
       {message && (
         <Alert data-cy="flash-message" severity="info">
           {message}
