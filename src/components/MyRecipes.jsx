@@ -20,7 +20,8 @@ const MyRecipes = () => {
     fetchRecipes();
   }, []);
 
-  const userRecipes = recipes.map((recipe) => {
+  const userRecipes = recipes.map((recipe, index) => {
+    recipe.index = index + 1;
     return (
       <Grid item key={recipe.id} md={12}>
         <MyRecipeCard recipe={recipe} />
