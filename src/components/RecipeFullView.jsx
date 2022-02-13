@@ -1,69 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { styled, Typography, Grid, Paper } from "@mui/material";
+import { Button, Alert } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useSelector } from "react-redux";
+import ShowFullRecipe from "./ShowFullRecipe";
 import Recipes from "../modules/Recipes";
-import IngredientsList from "./IngredientsList";
-
-const Img = styled("img")({
-  margin: "auto",
-  display: "block",
-  maxWidth: "100%",
-  maxHeight: "100%"
-});
+import { useNavigate } from "react-router-dom";
 
 const RecipeFullView = () => {
-  const [recipe, setRecipe] = useState({});
+  const { currentUser } = useSelector((state) => state);
+  const [message, setMessage] = useState();
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const fetchRecipe = async () => {
-    const data = await Recipes.show(id);
-    setRecipe(data.recipe);
+  const deleteRecipe = async () => {
+    const data = await Recipes.delete(id);
+    setMessage(data.message);
+    debugger;
+    return data;
   };
-  
-  useEffect(() => {
-    fetchRecipe();
-  }, []);
+
+  const confirmDelete = (confirm) => {
+    confirm.stopPropagation();
+    if (window.confirm("Are you sure you want to delete this recipe?")) {
+      deleteRecipe();
+      setTimeout(() => navigate("/my-recipes"), 1500);
+    }
+  };
 
   return (
-    <Paper
-      sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1, boxShadow: 3 }}
-    >
-      <Grid container spacing={2}>
-        <Grid item>
-          <Img
-            src="https://mui.com/static/images/cards/paella.jpg"
-            loading="lazy"
-          />
-        </Grid>
-        <Grid item>
-          <Typography gutterBottom variant="h5" data-cy="recipe-name">
-            {recipe.name}
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <IngredientsList ingredients={recipe.ingredients} />
-        </Grid>
-        <Grid item>
-          <Typography
-            gutterBottom
-            variant="body1"
-            data-cy="recipe-instructions"
+    <>
+      {currentUser ? (
+        <>
+          <Button
+            onClick={confirmDelete}
+            sx={{ margin: 1, ml: 77, flexGrow: 1, boxShadow: 3 }}
+            color="inherit"
+            data-cy="delete-btn"
+            variant="outlined"
+            startIcon={<DeleteIcon />}
           >
-            {recipe.instructions}
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Typography
-            data-cy="recipe-created_at"
-            variant="caption"
-            display="block"
-            gutterBottom
-          >
-            {recipe.created_at}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Paper>
+            Delete
+          </Button>
+          <ShowFullRecipe />
+          <Alert data-cy="flash-message">{message}</Alert>
+        </>
+      ) : (
+        <ShowFullRecipe />
+      )}
+    </>
   );
 };
 
