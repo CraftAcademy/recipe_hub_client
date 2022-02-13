@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button, Alert, Typography } from "@mui/material";
 import Recipes from "../modules/Recipes";
 import utilities from "../modules/utilities";
 import { styled } from "@mui/material/styles";
 import IngredientsFields from "./IngredientsFields";
+import { useParams } from "react-router-dom";
 
 const Input = styled("input")({
   display: "none"
 });
 
 const RecipeCreateForm = () => {
+  const { id } = useParams();
   const fields = { ingredient_id: "", unit: "", amount: "" };
   const [recipe, setRecipe] = useState({});
   const [inputList, setInputList] = useState([fields]);
@@ -37,6 +39,18 @@ const RecipeCreateForm = () => {
     setRecipe({ ...recipe, image: encodedFile });
   };
 
+  const fetchRecipe = async () => {
+    const data = await Recipes.show(id);
+    if (data.recipe) {
+      setRecipe(data.recipe);
+      setInputList([...data.recipe?.ingredients]);
+    }
+  };
+
+  useEffect(() => {
+    id && fetchRecipe();
+  }, []);
+
   return (
     <div>
       <TextField
@@ -45,15 +59,23 @@ const RecipeCreateForm = () => {
         variant="outlined"
         data-cy="recipe-name"
         name="name"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        value={recipe.name}
         onChange={handleChange}
       />
       <div>
         <TextField
           id="outlined-basic"
           label="Instructions"
+          value={recipe.instructions}
           multiline
           rows={4}
           variant="outlined"
+          InputLabelProps={{
+            shrink: true,
+          }}
           data-cy="instructions"
           name="instructions"
           onChange={handleChange}
