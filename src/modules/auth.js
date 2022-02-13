@@ -1,7 +1,8 @@
 import JtockAuth from "j-tockauth";
+import { apiURL } from "./network";
 
 const auth = new JtockAuth({
-  host: "http://localhost:3000",
+  host: apiURL,
   prefixUrl: "/api",
   debug: false
 });

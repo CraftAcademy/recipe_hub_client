@@ -3,9 +3,11 @@ import axios from "axios";
 let apiURL;
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-  apiURL = "http://localhost:3000/api";
+  apiURL = "http://localhost:3000";
 } else {
-  apiURL = "https://recipe-hub-api.herokuapp.com/api";
+  apiURL = "https://recipe-hub-api.herokuapp.com";
 }
 
-export const api = axios.create({ baseURL: apiURL });
+const api = axios.create({ baseURL: apiURL + "/api" });
+
+export { api, apiURL };
