@@ -1,26 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button, Alert, Typography } from "@mui/material";
 import Recipes from "../modules/Recipes";
 import utilities from "../modules/utilities";
 import { styled } from "@mui/material/styles";
 import IngredientsFields from "./IngredientsFields";
+import { useParams } from "react-router-dom";
 
 const Input = styled("input")({
   display: "none"
 });
 
 const RecipeCreateForm = () => {
+  const { id } = useParams();
   const fields = { ingredient_id: "", unit: "", amount: "" };
   const [recipe, setRecipe] = useState({});
   const [inputList, setInputList] = useState([fields]);
   const [message, setMessage] = useState();
   const [fileName, setFileName] = useState("");
-
-  const createRecipe = async () => {
-    const params = { ...recipe, ingredients_attributes: inputList };
-    const response = await Recipes.create(params);
-    setMessage(response.message);
-  };
 
   const handleChange = (event) => {
     setRecipe({
@@ -36,6 +32,18 @@ const RecipeCreateForm = () => {
     const encodedFile = await utilities.imageEncoder(file);
     setRecipe({ ...recipe, image: encodedFile });
   };
+
+  const fetchRecipe = async () => {
+    const data = await Recipes.show(id);
+    if (data.recipe) {
+      setRecipe(data.recipe);
+      setInputList([...data.recipe?.ingredients]);
+    }
+  };
+
+  useEffect(() => {
+    id && fetchRecipe();
+  }, []);
 
   return (
     <div>
@@ -74,7 +82,7 @@ const RecipeCreateForm = () => {
           setInputList={setInputList}
         />
       </div>
-      <Button variant="outlined" data-cy="submit-btn" onClick={createRecipe}>
+      <Button variant="outlined" data-cy="submit-btn">
         Save
       </Button>
       <div>
