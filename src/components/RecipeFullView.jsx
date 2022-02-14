@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { styled, Typography, Grid, Paper } from "@mui/material";
+import { styled, Typography, Grid, Paper, Button } from "@mui/material";
 import Recipes from "../modules/Recipes";
 import IngredientsList from "./IngredientsList";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Img = styled("img")({
   margin: "auto",
@@ -12,14 +14,20 @@ const Img = styled("img")({
 });
 
 const RecipeFullView = () => {
+  const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state);
   const [recipe, setRecipe] = useState({});
+  const [showEditDelete, setShowEditDelete] = useState(false);
   const { id } = useParams();
 
   const fetchRecipe = async () => {
     const data = await Recipes.show(id);
-    setRecipe(data.recipe);
+    if (data.recipe) {
+      currentUser?.uid === data.recipe?.owner && setShowEditDelete(true);
+      setRecipe(data.recipe);
+    }
   };
-  
+
   useEffect(() => {
     fetchRecipe();
   }, []);
@@ -28,6 +36,13 @@ const RecipeFullView = () => {
     <Paper
       sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1, boxShadow: 3 }}
     >
+      {showEditDelete && (
+        <Button data-cy="edit-recipe-btn" variant="contained" color="success"
+          onClick={() => navigate(`/recipes/${recipe.id}/edit`)}
+        >
+          Edit
+        </Button>
+      )}
       <Grid container spacing={2}>
         <Grid item>
           <Img
