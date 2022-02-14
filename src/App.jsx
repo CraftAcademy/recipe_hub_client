@@ -12,7 +12,7 @@ const App = () => {
   return (
     <React.Fragment>
       <NavigationBar />
-      <Container>
+      <Container style={{ paddingBottom: 20 }}>
         <Routes>
           <Route path="/" element={<RecipesMainView />} />
           <Route path="recipes/:id" element={<RecipeFullView />} />
