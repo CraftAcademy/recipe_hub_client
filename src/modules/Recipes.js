@@ -26,6 +26,17 @@ const Recipes = {
       return error;
     }
   },
+  async delete(id) {
+    try {
+      const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+      const { data } = await api.delete(`/recipes/${id}`, {
+        headers: headers
+      });
+      return data;
+    } catch (error) {
+      return error;
+    }
+  },
   async create(recipe) {
     try {
       const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
