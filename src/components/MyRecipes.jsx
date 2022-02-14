@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Container } from "@mui/material";
 import RecipeCreateForm from "./RecipeCreateForm";
 import Recipes from "../modules/Recipes";
 import { useSelector } from "react-redux";
@@ -30,7 +30,7 @@ const MyRecipes = () => {
   });
 
   return (
-    <>
+    <Container style={{ margin: "auto", width: "50%" }}>
       {showForm ? (
         <div>
           <Button data-cy="hide-recipe" onClick={() => setShowForm(!showForm)}>
@@ -43,10 +43,10 @@ const MyRecipes = () => {
           Create recipe
         </Button>
       )}
-      <Grid container spacing={4} data-cy="recipe-collection">
+      <Grid container spacing={4} data-cy="recipe-collection" style={{ marginTop: 10 }}>
         {userRecipes}
       </Grid>
-    </>
+    </ Container>
   );
 };
 

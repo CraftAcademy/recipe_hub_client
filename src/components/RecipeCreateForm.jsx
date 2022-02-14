@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { TextField, Button, Alert, Typography } from "@mui/material";
 import Recipes from "../modules/Recipes";
 import utilities from "../modules/utilities";
-import { styled } from "@mui/material/styles";
 import IngredientsFields from "./IngredientsFields";
+import {
+  TextField,
+  Button,
+  Alert,
+  Typography,
+  Box,
+  styled
+} from "@mui/material";
+import { PhotoCamera, Save } from "@mui/icons-material";
 
 const Input = styled("input")({
   display: "none"
@@ -38,45 +45,49 @@ const RecipeCreateForm = () => {
   };
 
   return (
-    <div>
+    <Box
+      component="form"
+      sx={{
+        "& > :not(style)": { m: 2 },
+        boxShadow: 3,
+        paddingRight: 4
+      }}
+      noValidate
+      autoComplete="off"
+    >
       <TextField
-        id="outlined-basic"
-        label="Recipe name"
-        variant="outlined"
         data-cy="recipe-name"
+        label="Recipe name"
         name="name"
+        value={recipe.name}
+        onChange={handleChange}
+        fullWidth
+        size="small"
+        variant="outlined"
         InputLabelProps={{
           shrink: true
         }}
-        value={recipe.name}
+      />
+      <TextField
+        fullWidth
+        size="small"
+        label="Instructions"
+        value={recipe.instructions}
+        multiline
+        rows={4}
+        variant="outlined"
+        InputLabelProps={{
+          shrink: true
+        }}
+        data-cy="instructions"
+        name="instructions"
         onChange={handleChange}
       />
-      <div>
-        <TextField
-          id="outlined-basic"
-          label="Instructions"
-          value={recipe.instructions}
-          multiline
-          rows={4}
-          variant="outlined"
-          InputLabelProps={{
-            shrink: true
-          }}
-          data-cy="instructions"
-          name="instructions"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <IngredientsFields
-          fields={fields}
-          inputList={inputList}
-          setInputList={setInputList}
-        />
-      </div>
-      <Button variant="outlined" data-cy="submit-btn" onClick={createRecipe}>
-        Save
-      </Button>
+      <IngredientsFields
+        fields={fields}
+        inputList={inputList}
+        setInputList={setInputList}
+      />
       <div>
         <label htmlFor="contained-button-file">
           <Input
@@ -88,7 +99,13 @@ const RecipeCreateForm = () => {
             multiple
             type="file"
           />
-          <Button variant="contained" component="span">
+          <Button
+            startIcon={<PhotoCamera />}
+            variant="contained"
+            component="span"
+            color="success"
+            style={{ margin: 10 }}
+          >
             Image
           </Button>
         </label>
@@ -100,12 +117,21 @@ const RecipeCreateForm = () => {
           {fileName}
         </Typography>
       </div>
+      <Button
+        endIcon={<Save />}
+        variant="contained"
+        color="secondary"
+        data-cy="submit-btn"
+        onClick={createRecipe}
+      >
+        Save
+      </Button>
       {message && (
         <Alert data-cy="flash-message" severity="info">
           {message}
         </Alert>
       )}
-    </div>
+    </Box>
   );
 };
 
