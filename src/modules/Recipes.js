@@ -48,6 +48,28 @@ const Recipes = {
       return error;
     }
   },
+  async update(recipe) {
+    try {
+      const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+      const response = await api.put(
+        `/recipes/${recipe.id}`,
+        {
+          recipe: {
+            name: recipe.name,
+            instructions: recipe.instructions,
+            image: recipe.image,
+            ingredients: [...recipe.ingredients]
+          }
+        },
+        {
+          headers: headers
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  },
   async getIngredients() {
     try {
       const { data } = await api.get("/ingredients");

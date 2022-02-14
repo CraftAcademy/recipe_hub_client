@@ -6,6 +6,7 @@ import { Container } from "@mui/material";
 import NavigationBar from "./components/NavigationBar";
 import RegistrationForm from "./components/RegistrationForm";
 import MyRecipes from "./components/MyRecipes";
+import RecipeEditView from "./components/RecipeEditView";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="recipes/:id" element={<RecipeFullView />} />
           <Route path="signup" element={<RegistrationForm />} />
           <Route path="my-recipes" element={<MyRecipes />} />
+          <Route path="recipes/:id/edit" element={<RecipeEditView />} />
         </Routes>
       </Container>
     </React.Fragment>

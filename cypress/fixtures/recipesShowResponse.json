@@ -8,6 +8,7 @@
       { "amount": 400.0, "unit": "ml", "name": "milk" }
     ],
     "created_at": "February 07, 2022 16:38",
-    "updated_at": "February 07, 2022 16:38"
+    "updated_at": "February 07, 2022 16:38",
+    "owner": "johnskoglund@test.com"
   }
 }
