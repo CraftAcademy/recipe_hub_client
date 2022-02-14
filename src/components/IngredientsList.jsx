@@ -27,7 +27,7 @@ const IngredientsList = ({ ingredients }) => {
   });
 
   return (
-    <Table sx={{ width: 230 }}>
+    <Table sx={{ width: 230 }} size="small">
       <TableBody data-cy="ingredients-list">{ingredientsList}</TableBody>
     </Table>
   );

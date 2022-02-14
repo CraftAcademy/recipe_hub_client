@@ -6,6 +6,8 @@ import IngredientsList from "./IngredientsList";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ForkRight } from "@mui/icons-material";
+import EditIcon from "@mui/icons-material/Edit";
 
 const Img = styled("img")({
   margin: "auto",
@@ -57,35 +59,45 @@ const RecipeFullView = () => {
         </Alert>
       )}
       <Paper
-        sx={{ p: 2, margin: "auto", maxWidth: 500, flexGrow: 1, boxShadow: 3 }}
+        sx={{ p: 2, margin: "auto", maxWidth: 800, flexGrow: 1, boxShadow: 3 }}
       >
         {showEditDelete && (
           <>
-            <Button data-cy="edit-recipe-btn" variant="contained" color="success"
+            <Button
+              data-cy="edit-recipe-btn"
+              variant="contained"
+              color="success"
+              sx={{
+                marginRight: "10px",
+                marginBottom: "10px"
+              }}
+              startIcon={<EditIcon />}
               onClick={() => navigate(`/recipes/${recipe.id}/edit`)}
             >
               Edit
             </Button>
             <Button
               data-cy="delete-btn"
-              color="inherit"
-              variant="outlined"
+              color="error"
+              variant="contained"
               startIcon={<DeleteIcon />}
+              sx={{ marginBottom: "10px" }}
               onClick={confirmDelete}
             >
               Delete
             </Button>
           </>
         )}
-        <Grid container spacing={2}>
-          <Grid item>
+        <Grid sx={{ position: "relative" }} spacing={2}>
+          <Grid container item>
             <Img
+              sx={{ position: "absolute", right: "20px" }}
               src="https://mui.com/static/images/cards/paella.jpg"
               loading="lazy"
             />
           </Grid>
           <Grid item>
-            <Typography gutterBottom variant="h5" data-cy="recipe-name">
+            <Typography gutterBottom variant="h4" data-cy="recipe-name">
               {recipe.name}
             </Typography>
           </Grid>
