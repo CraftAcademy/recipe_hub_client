@@ -11,7 +11,6 @@ const LoginForm = () => {
     if (event.keyCode === 13) {
       const response = await Authentication.signIn(loginForm);
       if (response.success) {
-        console.log(response.data);
         dispatch({ type: "SET_CURRENT_USER", payload: response.data });
       } else {
         dispatch({

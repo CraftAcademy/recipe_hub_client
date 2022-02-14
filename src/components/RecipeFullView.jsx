@@ -15,11 +15,11 @@ const Img = styled("img")({
 });
 
 const RecipeFullView = () => {
-  const [showEditDelete, setShowEditDelete] = useState(false);
-  const [recipe, setRecipe] = useState({});
+  const navigate = useNavigate();
   const { id } = useParams();
   const { currentUser } = useSelector((state) => state);
-  const navigate = useNavigate();
+  const [recipe, setRecipe] = useState({});
+  const [showEditDelete, setShowEditDelete] = useState(false);
   const [message, setMessage] = useState();
 
   const fetchRecipe = async () => {
@@ -61,8 +61,12 @@ const RecipeFullView = () => {
       >
         {showEditDelete && (
           <>
+            <Button data-cy="edit-recipe-btn" variant="contained" color="success"
+              onClick={() => navigate(`/recipes/${recipe.id}/edit`)}
+            >
+              Edit
+            </Button>
             <Button
-              sx={{ margin: 1, ml: 44, flexGrow: 1, boxShadow: 3 }}
               data-cy="delete-btn"
               color="inherit"
               variant="outlined"
