@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Box,
@@ -11,13 +11,36 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LoginForm from "./LoginForm";
+import {
+  useActionCable,
+  useChannel,
+} from "@aersoftware/react-use-action-cable";
 
 const NavigationBar = () => {
+  const [message, setMessage] = useState()
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentUser, errorMessage, showLogin } = useSelector(
     (state) => state
   );
+  const { actionCable } = useActionCable("ws://localhost:3000/cable");
+  const { subscribe } = useChannel(actionCable);
+
+  useEffect(() => {
+    subscribe(
+      {
+        channel: "NotificationsChannel",
+      },
+      {
+        connected() {
+          console.log("connected to RALS ACTIONS CHANNEL");
+        },
+        received(data) {
+          setMessage(data.message);
+        },
+      }
+    );
+  }, []);
 
   const toggleLogin = () => {
     dispatch({ type: "TOGGLE_LOGIN", payload: !showLogin });
@@ -44,6 +67,7 @@ const NavigationBar = () => {
           >
             Recipe Hub
           </Typography>
+          {message && <h3>{message}</h3>  }
           {currentUser ? (
             <>
               <Button
