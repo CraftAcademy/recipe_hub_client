@@ -51,6 +51,28 @@ describe("A visitor, by clicking a recipe card in the main view", () => {
     );
   });
 
+  it("is expected to display a add comment field", () => {
+    cy.get("[data-cy=comment-field]").should("be.visible");
+  });
+
+  it("is expected to display a comment feed", () => {
+    cy.get("[data-cy=comment-feed]").should("be.visible");
+  });
+
+  describe("post a comment when hitting the enter button", () => {
+    before(() => {
+      cy.get("[data-cy=comment-field]")
+        .type("I really enjoyed this recipe!")
+        .type("{enter}");
+    });
+    it("is expected to dispely a comment in the comment feed", () => {
+      cy.get("[data-cy=comment-feed").should(
+        "contain.text",
+        "I really enjoyed this recipe!"
+      );
+    });
+  });
+
   describe("goes back to main page", () => {
     before(() => {
       cy.intercept("GET", "/api/recipes", {
