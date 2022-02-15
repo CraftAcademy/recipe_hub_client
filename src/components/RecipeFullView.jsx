@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { styled, Typography, Grid, Paper, Button, Alert } from "@mui/material";
+import {
+  styled,
+  Typography,
+  Grid,
+  Paper,
+  Button,
+  Alert,
+  TextField,
+  Box,
+  Avatar
+} from "@mui/material";
 import Recipes from "../modules/Recipes";
 import IngredientsList from "./IngredientsList";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -123,6 +133,27 @@ const RecipeFullView = () => {
           </Grid>
         </Grid>
       </Paper>
+      <Box
+        component="form"
+        sx={{ p: 2, margin: "auto", maxWidth: 800, flexGrow: 1, boxShadow: 3 }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          data-cy="comment-field"
+          name="comment"
+          size="normal"
+          variant="filled"
+          fullWidth
+        />
+        <Paper style={{ padding: "40px 20px" }}>
+          <Grid container wrap="nowrap" spacing={2}>
+            <Grid justifyContent="left">
+              <p>Here is the comment</p>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Box>
     </>
   );
 };
