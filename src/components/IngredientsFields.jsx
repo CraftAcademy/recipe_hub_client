@@ -45,6 +45,8 @@ const IngredientsFields = ({ fields, inputList, setInputList }) => {
               label="Ingredient"
               defaultValue={""}
               onChange={(event) => handleInputChange(event, i)}
+              size="small"
+              sx={{ width: 100 }}
             >
               {ingredients.map((ingredient) => {
                 return (
@@ -64,6 +66,8 @@ const IngredientsFields = ({ fields, inputList, setInputList }) => {
               placeholder="Unit"
               value={item.unit}
               onChange={(event) => handleInputChange(event, i)}
+              size="small"
+              sx={{ maxWidth: 110 }}
             />
             <TextField
               data-cy={`amount-input-${i}`}
@@ -71,18 +75,23 @@ const IngredientsFields = ({ fields, inputList, setInputList }) => {
               placeholder="Amount"
               value={item.amount}
               onChange={(event) => handleInputChange(event, i)}
+              size="small"
+              sx={{ maxWidth: 110 }}
             />
             {inputList.length !== 1 && (
               <Button
                 data-cy={`remove-btn-${i}`}
                 onClick={() => handleRemoveClick(i)}
+                size="small"
+                color="error"
+                variant="contained"
               >
                 -
               </Button>
             )}
             <div>
               {inputList.length - 1 === i && (
-                <Button data-cy="add-ingredient-line" onClick={handleAddClick}>
+                <Button data-cy="add-ingredient-line" onClick={handleAddClick} size="small">
                   Add another...
                 </Button>
               )}
