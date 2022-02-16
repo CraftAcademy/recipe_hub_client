@@ -9,10 +9,21 @@
       { "amount": 150.0, "unit": "grams", "name": "vanilla" },
       { "amount": 1000.0, "unit": "grams", "name": "water" },
       { "amount": 800.0, "unit": "grams", "name": "weat" }
-
     ],
     "created_at": "February 07, 2022 16:38",
     "updated_at": "February 07, 2022 16:38",
-    "owner": "johnskoglund@test.com"
+    "owner": "johnskoglund@test.com",
+    "comments": [
+      {
+        "username": "Mathias Ljungholm",
+        "body": "I loved your focaccia",
+        "published": "February 12, 2002 13.33"
+      },
+      {
+        "username": "Love Bellinder",
+        "body": "I loved your focaccia, it was wonderful",
+        "published": "February 14, 2002 13.33"
+      }
+    ]
   }
 }
