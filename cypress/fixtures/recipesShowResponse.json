@@ -9,10 +9,11 @@
       { "amount": 150.0, "unit": "grams", "name": "vanilla" },
       { "amount": 1000.0, "unit": "grams", "name": "water" },
       { "amount": 800.0, "unit": "grams", "name": "weat" }
-
     ],
     "created_at": "February 07, 2022 16:38",
     "updated_at": "February 07, 2022 16:38",
-    "owner": "johnskoglund@test.com"
+    "owner": "johnskoglund@test.com",
+    "image": "https://source.unsplash.com/random/900×700/?fried rice",
+    "forks_count": 0
   }
 }

@@ -5,49 +5,71 @@
       "name": "Fried rice with kimchi",
       "instructions": "Mix everything",
       "created_at": "February 07, 2022 16:38",
-      "updated_at": "February 07, 2022 16:38"
+      "updated_at": "February 07, 2022 16:38",
+      "image": "https://source.unsplash.com/random/900×700/?fried rice",
+      "forks_count": 0,
+      "user": "user@mail.com"
     },
     {
       "id": 11,
       "name": "Pasta bolognese",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
-      "updated_at": "2022-02-07T10:35:20.683Z"
+      "updated_at": "2022-02-07T10:35:20.683Z",
+      "image": "https://source.unsplash.com/random/900×700/?pasta",
+      "forks_count": 0,
+      "user": "user@mail.com"
+ 
     },
     {
       "id": 10,
       "name": "Flygande Jakob",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
-      "updated_at": "2022-02-07T10:35:20.683Z"
+      "updated_at": "2022-02-07T10:35:20.683Z",
+      "image": "https://source.unsplash.com/random/900×700/?macaroni and cheese",
+      "forks_count": 0,
+      "user": "user@mail.com"
     },
     {
       "id": 9,
       "name": "Cheese Cake",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
-      "updated_at": "2022-02-07T10:35:20.683Z"
+      "updated_at": "2022-02-07T10:35:20.683Z",
+      "image": "https://source.unsplash.com/random/900×700/?food",
+      "forks_count": 0,
+      "user": "user@mail.com"
     },
     {
       "id": 8,
       "name": "Cheese Cake",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
-      "updated_at": "2022-02-07T10:35:20.683Z"
+      "updated_at": "2022-02-07T10:35:20.683Z",
+      "image": "https://source.unsplash.com/random/900×700/?birthday cake",
+      "forks_count": 0,
+      "user": "user@mail.com"
     },
     {
       "id": 7,
       "name": "Cheese Cake",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
-      "updated_at": "2022-02-07T10:35:20.683Z"
+      "updated_at": "2022-02-07T10:35:20.683Z",
+      "image": "https://source.unsplash.com/random/900×700/?cake",
+      "forks_count": 0,
+      "user": "user@mail.com"
     },
     {
       "id": 6,
       "name": "Cheese Cake",
       "instructions": "Mix everything",
       "created_at": "2022-02-07T10:35:20.683Z",
-      "updated_at": "2022-02-07T10:35:20.683Z"
+      "updated_at": "2022-02-07T10:35:20.683Z",
+      "image": "https://source.unsplash.com/random/900×700/?cheese cake",
+      "forks_count": 0,
+      "user": "user@mail.com"
     }
   ]
 }
