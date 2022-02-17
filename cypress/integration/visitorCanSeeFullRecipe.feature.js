@@ -8,8 +8,8 @@ describe("A visitor, by clicking a recipe card in the main view", () => {
       fixture: "recipesShowResponse.json"
     }).as("RecipeShow");
     cy.visit("/");
-    cy.wait("@RecipesIndex");
     cy.get("[data-cy=recipe-card-1]").click();
+    cy.wait("@RecipesIndex");
   });
 
   it("is expected to make a GET request to the API", () => {
