@@ -33,6 +33,7 @@ describe("Visitor can visit the home page.", () => {
   });
 
   it("is expected to see description of first recipe ", () => {
+    cy.get("[data-cy=recipe-expand-1]").click()
     cy.get("[data-cy=recipe-description-1]").should(
       "contain.text",
       "Mix everything"
