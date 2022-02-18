@@ -1,0 +1,40 @@
+{
+  "recipes": [
+    {
+      "id": 12,
+      "image": "./carbonara.jpeg",
+      "name": "Fried rice with kimchi",
+      "instructions": "Mix everything",
+      "created_at": "February 18, 2022 16:38",
+      "updated_at": "February 18, 2022 16:38",
+      "user": "johnskoglund@test.com"
+    },
+    {
+      "id": 1144,
+      "image": "/home/giovanni/Desktop/Craft Academy/11th Week/recipe_hub_api/tmp/storage/j4/bh/j4bh10atjer2l76stkcb68r8lz1u",
+      "name": "Souvlaki",
+      "instructions": "Granny Smith apples mixed with brown sugar and butter filling, in a flaky all-butter crust, with ice cream.",
+      "created_at": "February 11, 2022 14:22",
+      "updated_at": "February 11, 2022 14:22",
+      "user": "rudolph@bayer.co"
+    },
+    {
+      "id": 1143,
+      "image": "/home/giovanni/Desktop/Craft Academy/11th Week/recipe_hub_api/tmp/storage/v6/t8/v6t8v93ag6w06pfml1vkpyjz2fbr",
+      "name": "Pizza",
+      "instructions": "Granny Smith apples mixed with brown sugar and butter filling, in a flaky all-butter crust, with ice cream.",
+      "created_at": "February 11, 2022 14:22",
+      "updated_at": "February 11, 2022 14:22",
+      "user": "rudolph@bayer.co"
+    },
+    {
+      "id": 1142,
+      "image": "/home/giovanni/Desktop/Craft Academy/11th Week/recipe_hub_api/tmp/storage/xu/59/xu59d67un05llm18f0nnfnm9sfms",
+      "name": "Caesar Salad",
+      "instructions": "Breaded fried chicken with waffles, and a side of maple syrup.",
+      "created_at": "February 11, 2022 14:22",
+      "updated_at": "February 11, 2022 14:22",
+      "user": "rudolph@bayer.co"
+    }
+  ]
+}

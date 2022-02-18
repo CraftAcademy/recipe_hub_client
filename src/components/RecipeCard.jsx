@@ -1,18 +1,30 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import Recipes from "../modules/Recipes";
 import {
   Card,
   CardHeader,
   CardMedia,
   CardContent,
+  CardActionArea,
+  CardActions,
+  IconButton,
   Typography,
   Avatar,
-  colors,
-  CardActionArea
+  colors
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 
 const RecipeCard = ({ recipe }) => {
   const navigate = useNavigate();
+
+  const forkRecipe = async () => {
+    const params = { id: recipe.id, fork: true };
+    const response = await Recipes.create(params);
+    if (response.forked) {
+      navigate("my-recipes");
+    }
+  };
 
   return (
     <Card
@@ -41,6 +53,14 @@ const RecipeCard = ({ recipe }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
+      <CardActions disableSpacing>
+        <IconButton
+          data-cy={`recipe-fork-btn-${recipe.index}`}
+          onClick={forkRecipe}
+        >
+          <DinnerDiningIcon />
+        </IconButton>
+      </CardActions>
     </Card>
   );
 };
