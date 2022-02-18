@@ -40,21 +40,38 @@ const Recipes = {
   async create(recipe) {
     try {
       const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-      const response = await api.post(
-        "/recipes",
-        {
-          recipe: {
-            name: recipe.name,
-            instructions: recipe.instructions,
-            image: recipe.image,
-            ingredients_attributes: [...recipe.ingredients_attributes]
+      if (recipe.fork) {
+        let { data } = await api.post(
+          "/recipes",
+          {
+            recipe: {
+              id: recipe.id,
+              fork: recipe.fork
+            }
+          },
+          {
+            headers: headers
           }
-        },
-        {
-          headers: headers
-        }
-      );
-      return response.data;
+        );
+        data.forked = true;
+        return data;
+      } else {
+        const { data } = await api.post(
+          "/recipes",
+          {
+            recipe: {
+              name: recipe.name,
+              instructions: recipe.instructions,
+              image: recipe.image,
+              ingredients_attributes: [...recipe.ingredients_attributes]
+            }
+          },
+          {
+            headers: headers
+          }
+        );
+        return data;
+      }
     } catch (error) {
       return error;
     }
