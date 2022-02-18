@@ -9,10 +9,16 @@
       { "amount": 150.0, "unit": "grams", "name": "vanilla" },
       { "amount": 1000.0, "unit": "grams", "name": "water" },
       { "amount": 800.0, "unit": "grams", "name": "weat" }
-
     ],
     "created_at": "February 07, 2022 16:38",
     "updated_at": "February 07, 2022 16:38",
-    "owner": "johnskoglund@test.com"
+    "owner": "johnskoglund@test.com",
+    "comments": [
+      { "body": "Wow, that's so cool", "user": "Lisa Bode" },
+      { "body": "I will make this for sure!", "user": "Aunt wife" }
+    ],
+    "forks_count": 0,
+    "image": "/home/defycab/recipe_hub_api/tmp/storage/7t/9j/7t9jl5g39y0qljyx89x48tpy20gc"
   }
 }
+
