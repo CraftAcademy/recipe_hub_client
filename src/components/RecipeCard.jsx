@@ -1,18 +1,37 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Recipes from "../modules/Recipes";
 import {
   Card,
   CardHeader,
   CardMedia,
   CardContent,
+  CardActionArea,
+  CardActions,
+  IconButton,
   Typography,
   Avatar,
-  colors,
-  CardActionArea
+  colors
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 
 const RecipeCard = ({ recipe }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state);
+
+  const forkRecipe = async () => {
+    const params = { id: recipe.id, fork: true };
+    const response = await Recipes.create(params);
+    if (response.forked) {
+      navigate("my-recipes");
+      dispatch({ type: "SET_FLASH_MESSAGE", payload: response.message });
+      setTimeout(() => {
+        dispatch({ type: "SET_FLASH_MESSAGE", payload: "" });
+      }, 3500);
+    }
+  };
 
   return (
     <Card
@@ -41,6 +60,16 @@ const RecipeCard = ({ recipe }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
+      {currentUser && (
+        <CardActions disableSpacing>
+          <IconButton
+            data-cy={`recipe-fork-btn-${recipe.index}`}
+            onClick={forkRecipe}
+          >
+            <DinnerDiningIcon />
+          </IconButton>
+        </CardActions>
+      )}
     </Card>
   );
 };
