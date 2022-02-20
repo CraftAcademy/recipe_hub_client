@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Grid, Container } from "@mui/material";
+import { Button, Grid, Container, Alert } from "@mui/material";
 import RecipeCreateForm from "./RecipeCreateForm";
 import Recipes from "../modules/Recipes";
 import { useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import MyRecipeCard from "./MyRecipeCard";
 
 const MyRecipes = () => {
   const [showForm, setShowForm] = useState(false);
-  const { currentUser } = useSelector((state) => state);
+  const { currentUser, flashMessage } = useSelector((state) => state);
   const [recipes, setRecipes] = useState([]);
 
   const fetchRecipes = async () => {
@@ -31,6 +31,11 @@ const MyRecipes = () => {
 
   return (
     <Container style={{ margin: "auto", width: "50%" }}>
+      {flashMessage && (
+        <Alert data-cy="flash-message" severity="success">
+          {flashMessage}
+        </Alert>
+      )}
       {showForm ? (
         <div>
           <Button

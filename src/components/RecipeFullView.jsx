@@ -100,7 +100,7 @@ const RecipeFullView = () => {
           </Grid>
           <Grid item xs={6}>
             <Img
-              src="https://mui.com/static/images/cards/paella.jpg"
+              src={recipe.image}
               loading="lazy"
             />
           </Grid>
