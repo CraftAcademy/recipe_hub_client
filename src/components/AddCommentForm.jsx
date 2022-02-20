@@ -5,8 +5,9 @@ import Comments from "../modules/Comments";
 import { useParams } from "react-router-dom";
 
 const AddCommentForm = ({ onCommentAdded }) => {
+  const initialComment = { body: "" };
   const { currentUser } = useSelector((state) => state);
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState(initialComment);
   const { id } = useParams();
 
   const handleChange = (event) => {
@@ -20,6 +21,7 @@ const AddCommentForm = ({ onCommentAdded }) => {
     const response = await Comments.create(id, comment);
     if (response.comment) {
       onCommentAdded();
+      setComment(initialComment);
     }
   };
 
@@ -31,6 +33,7 @@ const AddCommentForm = ({ onCommentAdded }) => {
             data-cy="comment-field"
             name="body"
             size="normal"
+            value={comment.body}
             variant="outlined"
             fullWidth
             multiline

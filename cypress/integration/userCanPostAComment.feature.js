@@ -35,5 +35,9 @@ describe("User", () => {
           );
         });
     });
+
+    it("is expected to clear comment field", () => {
+      cy.get("[data-cy=comment-field]").should("have.value", "");
+    });
   });
 });
