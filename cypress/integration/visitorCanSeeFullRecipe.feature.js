@@ -51,6 +51,18 @@ describe("A visitor, by clicking a recipe card in the main view", () => {
     );
   });
 
+  it("is expected to not see Comment text area", () => {
+    cy.get("[data-cy=comment-field]").should("not.exist");
+  });
+
+  it("is expected to not see 'Post Comment' button", () => {
+    cy.get("[data-cy=post-comment-btn]").should("not.exist");
+  });
+
+  it("is expected to display a comment feed", () => {
+    cy.get("[data-cy=comment-feed]").should("be.visible");
+  });
+
   describe("goes back to main page", () => {
     before(() => {
       cy.intercept("GET", "/api/recipes", {
