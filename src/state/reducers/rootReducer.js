@@ -10,6 +10,11 @@ const rootReducer = (state, action) => {
         ...state,
         errorMessage: action.payload
       };
+    case "SET_FLASH_MESSAGE":
+      return {
+        ...state,
+        flashMessage: action.payload
+      };
     case "TOGGLE_LOGIN":
       return {
         ...state,

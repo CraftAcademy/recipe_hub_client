@@ -38,4 +38,8 @@ describe("Visitor can visit the home page.", () => {
       "Mix everything"
     );
   });
+
+  it("is expected to not see 'Fork' recipe button in Recipe cards", () => {
+    cy.get("[data-cy=recipe-fork-btn-1]").should("not.exist");
+  });
 });
