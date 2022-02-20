@@ -8,7 +8,7 @@ const Comments = {
         `/recipes/${id}/comments`,
         {
           comment: {
-            body: comment
+            body: comment.body
           }
         },
         {

@@ -29,7 +29,7 @@ const AddCommentForm = ({ onCommentAdded }) => {
         <>
           <TextField
             data-cy="comment-field"
-            name="comment"
+            name="body"
             size="normal"
             variant="outlined"
             fullWidth
