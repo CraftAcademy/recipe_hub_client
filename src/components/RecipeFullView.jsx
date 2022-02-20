@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { styled, Typography, Grid, Paper, Button, Alert } from "@mui/material";
 import Recipes from "../modules/Recipes";
 import IngredientsList from "./IngredientsList";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import { useSelector } from "react-redux";
+import CommentsSection from "./CommentsSection";
 
 const Img = styled("img")({
   margin: "auto",
@@ -22,12 +22,14 @@ const RecipeFullView = () => {
   const [recipe, setRecipe] = useState({});
   const [showEditDelete, setShowEditDelete] = useState(false);
   const [message, setMessage] = useState();
+  const [commentsList, setCommentsList] = useState([]);
 
   const fetchRecipe = async () => {
     const data = await Recipes.show(id);
     if (data.recipe) {
       currentUser?.uid === data.recipe?.owner && setShowEditDelete(true);
       setRecipe(data.recipe);
+      setCommentsList(data.recipe.comments);
     }
   };
 
@@ -51,7 +53,7 @@ const RecipeFullView = () => {
   }, []);
 
   return (
-    <>
+    <React.Fragment>
       {message && (
         <Alert data-cy="flash-message" severity="info">
           {message}
@@ -61,7 +63,7 @@ const RecipeFullView = () => {
         sx={{ p: 2, margin: "auto", maxWidth: 800, flexGrow: 1, boxShadow: 3 }}
       >
         {showEditDelete && (
-          <>
+          <React.Fragment>
             <Button
               data-cy="edit-recipe-btn"
               onClick={() => navigate(`/recipes/${recipe.id}/edit`)}
@@ -87,7 +89,7 @@ const RecipeFullView = () => {
             >
               Delete
             </Button>
-          </>
+          </React.Fragment>
         )}
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -123,7 +125,11 @@ const RecipeFullView = () => {
           </Grid>
         </Grid>
       </Paper>
-    </>
+      <CommentsSection
+        onCommentAdded={fetchRecipe}
+        commentsList={commentsList}
+      />
+    </React.Fragment>
   );
 };
 
