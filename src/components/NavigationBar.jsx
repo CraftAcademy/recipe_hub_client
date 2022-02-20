@@ -35,7 +35,7 @@ const NavigationBar = () => {
         <CssBaseline />
         <Toolbar>
           <Typography
-            sx={{ flexGrow: 1 }}
+            sx={{ flexGrow: 1, cursor: "pointer" }}
             variant="h4"
             component="div"
             align="center"
