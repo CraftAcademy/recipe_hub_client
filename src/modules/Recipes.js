@@ -12,7 +12,7 @@ const Recipes = {
         return data;
       } else {
         const { data } = await api.get("/recipes");
-        return data.recipes;
+        return data;
       }
     } catch (error) {
       return error;
@@ -73,7 +73,7 @@ const Recipes = {
         return data;
       }
     } catch (error) {
-      return error;
+      return error.response?.data || error;
     }
   },
   async update(recipe) {
@@ -95,7 +95,7 @@ const Recipes = {
       );
       return response.data;
     } catch (error) {
-      return error;
+      return error.response?.data || error;
     }
   },
   async getIngredients() {

@@ -12,7 +12,6 @@ const MyRecipes = () => {
 
   const fetchRecipes = async () => {
     const response = await Recipes.index(currentUser);
-
     setRecipes(response.recipes);
   };
 

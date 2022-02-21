@@ -9,7 +9,7 @@ const RecipesMainView = () => {
   const fetchRecipes = async () => {
     const response = await Recipes.index();
     if (!response.message) {
-      setRecipes(response);
+      setRecipes(response.recipes);
     }
   };
 

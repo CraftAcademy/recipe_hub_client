@@ -27,6 +27,7 @@ const RecipeCreateForm = () => {
     const params = { ...recipe, ingredients_attributes: inputList };
     const response = await Recipes.create(params);
     setMessage(response.message);
+    setTimeout(() => { setMessage("") }, 4000);
   };
 
   const handleChange = (event) => {

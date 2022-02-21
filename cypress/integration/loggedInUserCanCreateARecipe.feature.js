@@ -78,6 +78,7 @@ describe("Recipe", () => {
         fixture: "myRecipesResponse.json"
       });
       cy.intercept("POST", "api/recipes", {
+        statusCode: 422,
         fixture: "createWithoutName.json"
       });
       cy.intercept("GET", "api/ingredients", { body: { ingredients: [] } });
@@ -93,6 +94,33 @@ describe("Recipe", () => {
       cy.get("[data-cy=flash-message]").should(
         "contain",
         "Name can't be blank"
+      );
+    });
+  });
+
+  describe("can't be created without an image", () => {
+    before(() => {
+      cy.intercept("GET", "api/recipes*", {
+        fixture: "myRecipesResponse"
+      });
+      cy.intercept("POST", "api/recipes", {
+        statusCode: 422,
+        fixture: "createRecipeNoImageResponse"
+      });
+      cy.intercept("GET", "api/ingredients", { body: { ingredients: [] } });
+      cy.intercept("GET", "api/recipes", { body: { recipes: [] } });
+      cy.visitAndAuthenticate();
+      cy.get("[data-cy=my-recipes]").click();
+      cy.get("[data-cy=create-recipe]").click();
+      cy.get("[data-cy=recipe-name]").type("Pancakes");
+      cy.get("[data-cy=instructions]").type("Mix them together. Bake");
+      cy.get("[data-cy=submit-btn]").click();
+    });
+
+    it("is expected to see error message", () => {
+      cy.get("[data-cy=flash-message]").should(
+        "contain",
+        "A recipe must have an image"
       );
     });
   });
